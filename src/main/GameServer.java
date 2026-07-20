@@ -3,6 +3,7 @@ package main;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -23,7 +24,7 @@ public class GameServer {
         maxPlayers = 4;
 
         try {
-            ss = new ServerSocket(12345);
+            ss = new ServerSocket(12345, 0, InetAddress.getByName("0.0.0.0"));
         } catch (IOException e) {
             System.out.println("IOException from Game Server Constructor");
         }

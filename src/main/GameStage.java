@@ -25,6 +25,7 @@ public class GameStage extends JFrame implements Runnable {
 
 	private Socket socket;
 	private int playerId;
+	private String serverAddress;
 
 	private ReadFromServer rfs;
 	private WriteToServer wts;
@@ -33,9 +34,14 @@ public class GameStage extends JFrame implements Runnable {
 
 	public Player player, player2;
 
-	GameStage(String role, String name){
+	GameStage(String role, String name) {
+    	this(role, name, null);
+	}
+
+	GameStage(String role, String name, String serverAddress){
 		this.role = role;
 		this.name = name;
+		this.serverAddress = serverAddress;
 
 		this.setTitle("Tagu-taguan");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -102,7 +108,8 @@ public class GameStage extends JFrame implements Runnable {
 	void connectToServer() {
 		playerId = 1;
 		try {
-			socket = new Socket("localhost", 12345);
+			String targetHost = (serverAddress == null || serverAddress.trim().isEmpty()) ? "localhost" : serverAddress;
+			socket = new Socket(targetHost, 12345);
 			DataInputStream in = new DataInputStream(socket.getInputStream());
 			DataOutputStream out = new DataOutputStream(socket.getOutputStream());
 

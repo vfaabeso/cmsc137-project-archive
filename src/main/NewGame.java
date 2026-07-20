@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -87,9 +88,18 @@ public class NewGame implements ActionListener{
 
                 } else if (e.getSource() == btn_join) {
                     //game client
-                    newGameScreen.dispose();
-                    System.out.println("Join game");
-                    GameStage gamestage = new GameStage("join", name);
+                    String hostAddress = JOptionPane.showInputDialog(
+                        newGameScreen,
+                        "Enter the host device IP address:",
+                        "Join Game",
+                        JOptionPane.PLAIN_MESSAGE
+                    );
+
+                    if (hostAddress == null || hostAddress.trim().isEmpty()) {
+                        return;
+                    }
+
+                    GameStage gamestage = new GameStage("join", name, hostAddress.trim());
                 }
             }
 
