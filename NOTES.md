@@ -1,9 +1,19 @@
 # Setup
 
-Compile and run the script with:
+Run these commands in the parent directory to start the program.
+
+## Linux and Mac
 
 ```bash
 javac -d bin $(find src -name '*.java')
+java -cp bin main.Main
+```
+
+## Windows
+
+```bash
+dir /s /b src\*.java > sources.txt
+javac -d bin @sources.txt
 java -cp bin main.Main
 ```
 
